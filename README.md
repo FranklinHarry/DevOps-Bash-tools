@@ -117,9 +117,6 @@ awkward URLs more nicely replaced with shields.io
 [![Alpine](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Alpine/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Alpine%22)
 [![Alpine 3](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Alpine%203/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Alpine+3%22)
 
-[![Python 3.7](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.7/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.7%22)
-[![Python 3.8](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.8/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.8%22)
-[![Python 3.9](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.9/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.9%22)
 [![Python 3.10](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.10/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.10%22)
 [![Python 3.11](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.11/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.11%22)
 <!--
@@ -337,7 +334,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `curl_auth.sh` - shortens `curl` command by auto-loading your OAuth2 / JWT API token or username & password from environment variables or interactive starred password prompt through a ram file descriptor to avoid placing them on the command line (which would expose your credentials in the process list or OS audit log files). Used by many other adjacent API querying scripts
 - `curl_with_cookies.sh` - extracts cookies for a given URL from your `\$BROWSER`'s cookie jar and passes them to the `curl` command along with the rest of the args (workaround for older curl builds and Homebrew builds that don't have the newer `--cookies-from-browser functionality)
 - `emptytrash.sh` - empties the Trash portably on Linux and Mac. On Mac, combine with a post-run of `mac_delete_local_snapshots.sh` to ensure space is reclaimed
-- `find_duplicate_files*.sh` - finds duplicate files by size and/or checksum in given directory trees. Checksums are only done on files that already have matching byte counts for efficiency
+- `find_duplicate_files_by_*.sh` / - finds duplicate files by size and/or checksum in given directory trees. Checksums are only done on files that already have matching byte counts for efficiency
 - `find_broken_links.sh` - find broken links with delays to avoid tripping defenses
 - `find_broken_symlinks.sh` - find broken symlinks pointing to non-existent files/directories
 - `find_lock.sh` - tries to find if a lockfile is used in the given or current working directory by taking snapshots of the file list before and after a prompt in which you should open/close an application
@@ -365,10 +362,13 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `random_select.sh` - selects one of given args at random. Useful for sampling, running randomized subsets of large test suites etc.
 - `random_number.sh` - prints a random integer between two integer arguments (inclusive)
 - `random_string.sh` - prints a random alphanumeric string of a given length
-- `screen_terminal_to_stdout.sh` - dumps the GNU Screen terminal output to stdout
-- `screen_terminal_to_clipboard.sh` - dumps the GNU Screen terminal output to a temp file and copies to clipboard for sharing & debugging purposes
+- `screen_buffer_to_stdout.sh` - dumps the GNU Screen copy buffer contents to stdout
+- `screen_buffer_to_clipboard.sh` - dumps the GNU Screen copy buffercontents to a temp file and copies to clipboard for sharing & debugging purposes
+- `screen_terminal_to_stdout.sh` - dumps the GNU Screen terminal contents to stdout
+- `screen_terminal_to_clipboard.sh` - dumps the GNU Screen terminal contents to a temp file and copies to clipboard for sharing & debugging purposes
 - `shields_embed_logo.sh` - base64 encodes a given icon file or url and prints the `logo=...` url parameter you need to add the [shields.io](https://shields.io/) badge url
-- `shorten_text_selection.sh` - shortens the selected text in the prior window. Replaces `and` with `&` and crushes out multiple blank lines. I use this for LinkedIn comments due to the short 1250 character limit
+- `shorten_clipboard_text.sh` - shortens the text in clipboard to make social media comments shorter. Replaces `and` with `&` and crushes out multiple blank lines. I used this for LinkedIn comments due to the short 1250 character limit
+- `shorten_text_selection.sh` - shortens the selected text in the prior window. Faster way to use the above without having to copy and paste clipboard manually
 - `shred_file.sh` - overwrites a file 7 times to DoD standards before deleting it to prevent recovery of sensitive information
 - `shred_free_space.sh` - overwrites free space to prevent recovery of sensitive information for files that have already been deleted
 - `sleepuntil.sh` - sleep until the given HH:MM clock time. Useful for delaying the run of a foreground terminal program to inherit your terminal's environment variables (which may contain API keys) or interactively manage a process in your terminal, which cannot be done with the `at` command. I use this for my [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) backup each night so it waits in terminal for me to arrive home and runs it interactively to allow human gate safety approvals before Git committing any song removals from any playlist
@@ -423,12 +423,12 @@ Mac automation scripts to automate the Mac UI and settings
   once a minute to prevent the screensaver from coming on. Workaround to Active Directory Group Policies that don't let
   you disable the screensaver. Point your mouse to an area that will have no mouse click effect, the Cmd-Tab to Terminal
   and run this
-- `get_frontmost_process_title.scpt` - detect the frontmost window
+- `get_frontmost_process_title.applescript` - detect the frontmost window
   - to detect if you should send keystrokes / mouse clicks)
-- `set_frontmost_process.scpt` - switch to bring the given app to the foreground to send keystrokes / mouse clicks to it
-  - `browser_get_default.scpt` - get the default configured browser in format passable to Applescript (for  above script)
+- `set_frontmost_process.applescript` - switch to bring the given app to the foreground to send keystrokes / mouse clicks to it
+  - `browser_get_default.applescript` - get the default configured browser in format passable to Applescript (for  above script)
 - `is_screen_locked.py` - detect if the screen is locked to stop sending keystrokes or mouse clicks
-- `is_screensaver_running.scpt` - detect if the screensaver is running to stop sending keystrokes or mouse clicks
+- `is_screensaver_running.applescript` - detect if the screensaver is running to stop sending keystrokes or mouse clicks
 - `reopen_app.sh` - relaunch a given app
   (used to reload Shazam to detect DB changes after removing tracks programmatically from its DB)
 - `spotify_app_search.sh` - runs a search in the Spotify App on Mac using Applescript
@@ -438,8 +438,8 @@ Mac automation scripts to automate the Mac UI and settings
 - `shazam_search_spotify_then_delete_track.sh` - searches for each Shazam'd track in the local Spotify desktop app,
   then prompts to delete each track from the local Shazam DB once you've saved it in Spotify.
   Useful to migrate Shazam'd tracks to Spotify after Apple removed the integration
-- `screensaver_activate.scpt` - activate screensaver
-- `shorten_text_selection.scpt` - shortens the selected text in the prior window. Replaces `and` with `&` and crushes
+- `screensaver_activate.applescript` - activate screensaver
+- `shorten_text_selection.applescript` - shortens the selected text in the prior window. Replaces `and` with `&` and crushes
   out multiple blank lines. I use this for LinkedIn comments due to the short 1250 character limit
 - `start_app_at_login.sh` - adds an app to the Login items to auto-start
 
@@ -476,6 +476,11 @@ Prometheus, OpenTSDB, InfluxDB etc.
 
 - [sql/](https://github.com/HariSekhon/SQL-scripts) - 100+ SQL scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [Google BigQuery](https://cloud.google.com/bigquery) and [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration
 - `sqlite.sh` - one-touch [SQLite](https://www.sqlite.org/index.html), starts sqlite3 shell with sample 'chinook' database loaded
+- `sqlite_cache_*` - portable key cache lookup scripts for use in other scripts:
+  - `sqlite_cache_initialize.sh` - creates a sqlite db key cache table in the given db filename
+  - `sqlite_cache_set.sh` - creates a sqlite db key cache table entry for a given key with upsert behaviour
+  - `sqlite_cache_get.sh` - searches a sqlite db key cache table for a given key
+  - `sqlite_cache_delete.sh` - deletes a sqlite db key cache table entry for a given key
 - `mysql*.sh` - [MySQL](https://www.mysql.com/) scripts:
   - `mysql.sh` - shortens `mysql` command to connect to [MySQL](https://www.mysql.com/) by auto-populating switches from both standard environment variables like `$MYSQL_TCP_PORT`, `$DBI_USER`, `$MYSQL_PWD` (see [doc](https://dev.mysql.com/doc/refman/8.0/en/environment-variables.html)) and other common environment variables like `$MYSQL_HOST` / `$HOST`, `$MYSQL_USER` / `$USER`, `$MYSQL_PASSWORD` / `$PASSWORD`, `$MYSQL_DATABASE` / `$DATABASE`
   - `mysql_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
@@ -982,6 +987,10 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `precommit_run_changed_files.sh` - runs pre-commit on all files changed on the current branch vs the default branch. Useful to reproduce `pre-commit` checks that are failing in pull requests to get your PRs to pass
   - `git_diff_commit.sh` - quickly commits added or updated files to Git, showing a diff and easy enter prompt for each file. Super convenient for fast commits on the command line, and in vim and IDEs via hotkeys
   - `git_review_push.sh` - shows diff of what would be pushed upstream and prompts to push. Convenient for fast reviewed pushes via vim or IDEs hotkeys
+  - `git_rm_untracked.sh` - deletes untracked files from the local Git checkout's given base paths, with safety prompting
+  - `git_revert_line.sh` - reverts the first line that matches a given regex from the Git head commit's version of the same line number. Useful to revert some changes caused by over zealous sed'ing scripts, where you want to cherry-pick revert a single line change
+  - `git_files_no_uncommitted_changes.sh` - returns zero if given file(s) don't have uncommitted changes to Git, either staged or unstaged. Useful to be able to iterate over git files with in-place edits only if safe to do so without other uncommitted changes that would be at risk of being lost
+  - `git_grep_env_vars.sh` - find environment variables in the current git repo's code base in the format `SOME_VAR` (useful to find undocumented environment variables in internal or open source projects such as ArgoCD eg. [argoproj/argocd-cd #8680](https://github.com/argoproj/argo-cd/pull/8680))
   - `git_branch_delete_squash_merged.sh` - carefully detects if a squash merged branch you want to delete has no changes with the default trunk branch before deleting it.
      See [Squash Merges](https://github.com/HariSekhon/Knowledge-Base/blob/main/git.md#squash-merges-require-force-deleting-branches) in knowledge-base about why this is necessary.
   - `git_tag_release.sh` - creates a Git tag, auto-incrementing a `.N` suffix on the year/month/day date format if no exact version given
@@ -991,11 +1000,11 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_foreach_repo_replace_readme_actions.sh` - updates the `README.md` badges for GitHub Actions to match the local repo name. Useful to bulk fix copied badges quickly and easily
   - `git_foreach_repo_update_readme.sh` - git-diff-commits the `README.md` for each Git repo checkout using adjacent `git_foreach_repo.sh` and `git_diff_commit.sh` scripts. Useful to quickly bulk update `README.md` in all your projects, such as when references need updating
   - `git_push_stats.sh` - shows the Git push stats to the remote origin for the current branch - number of commits and lines of diff, using the following `git_origin_*.sh` scripts:
-  - `git_origin_log_to_push.sh` - shows the Git log in local branch that would be pushed to remote origin
-  - `git_origin_files_to_push.sh` - shows the Git files in local branch that would be pushed to remote origin
-  - `git_origin_diff_to_push.sh` - shows the Git diff of lines in local branch that would be pushed to remote origin
-  - `git_origin_commit_count_to_push.sh` - shows the number of Git commits in local branch that would be pushed to remote origin
-  - `git_origin_line_count_to_push.sh` - shows the Git number of lines changed in local branch that would be pushed to remote origin. These are lines actually added / changed / removed without surrounding context lines
+    - `git_origin_log_to_push.sh` - shows the Git log in local branch that would be pushed to remote origin
+    - `git_origin_files_to_push.sh` - shows the Git files in local branch that would be pushed to remote origin
+    - `git_origin_diff_to_push.sh` - shows the Git diff of lines in local branch that would be pushed to remote origin
+    - `git_origin_commit_count_to_push.sh` - shows the number of Git commits in local branch that would be pushed to remote origin
+    - `git_origin_line_count_to_push.sh` - shows the Git number of lines changed in local branch that would be pushed to remote origin. These are lines actually added / changed / removed without surrounding context lines
   - `git_merge_all.sh` / `git_merge_master.sh` / `git_merge_master_pull.sh` - merges updates from master branch to all other branches to avoid drift on longer lived feature branches / version branches (eg. [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_remotes_add_origin_providers.sh` - auto-creates remotes for the 4 major public repositories ([GitHub](https://github.com/)/[GitLab](https://gitlab.com/)/[Bitbucket](https://bitbucket.org)/[Azure DevOps](https://dev.azure.com/)), useful for `git pull -all` to fetch and merge updates from all providers in one command
   - `git_remotes_set_multi_origin.sh` - sets up multi-remote origin for unified push to automatically keep the 4 major public repositories in sync (especially useful for [Bitbucket](https://bitbucket.org) and [Azure DevOps](https://dev.azure.com/) which don't have [GitLab](https://gitlab.com/)'s auto-mirroring from [GitHub](https://github.com/) feature)
@@ -1004,7 +1013,6 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_remotes_set_https_creds_helpers.sh` - adds Git credential helpers configuration to the local git repo to use http API tokens dynamically from environment variables if they're set
   - `git_repos_pull.sh` - pull multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
   - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
-  - `git_grep_env_vars.sh` - find environment variables in the current git repo's code base in the format `SOME_VAR` (useful to find undocumented environment variables in internal or open source projects such as ArgoCD eg. [argoproj/argocd-cd #8680](https://github.com/argoproj/argo-cd/pull/8680))
   - `git_log_empty_commits.sh` - find empty commits in git history (eg. if a `git filter-branch` was run but `--prune-empty` was forgotten, leaking metadata like subjects containing file names or other sensitive info)
   - `git_log_me.sh` - shows only commits in the Git log done by you. Useful to remind yourself what parts the current Git repo you've been working on for periodic reviews, reports or even updating your CV!
   - `git_log_me_added.sh` - same as above but only file addition commits
@@ -1015,8 +1023,6 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_graph_commit_times_gnuplot_all_repos.sh` - generates GNUplot graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
   - `git_graph_commit_times_mermaidjs_all_repos.sh` - generates MermaidJS graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
   - `github_public_lines_of_code.sh` - checks out all public original source GitHub repos for the current or given user and then counts all lines of code for them with breakdowns of languages, files, code, comments and blanks
-  - `git_revert_line.sh` - reverts the first line that matches a given regex from the Git head commit's version of the same line number. Useful to revert some changes caused by over zealous sed'ing scripts, where you want to cherry-pick revert a single line change
-  - `git_files_no_uncommitted_changes.sh` - returns zero if given file(s) don't have uncommitted changes to Git, either staged or unstaged. Useful to be able to iterate over git files with in-place edits only if safe to do so without other uncommitted changes that would be at risk of being lost
   - `git_files_in_history.sh` - finds all filename / file paths in the git log history, useful for prepping for `git filter-branch`
   - `git_filter_branch_fix_author.sh` - rewrites Git history to replace author/committer name & email references (useful to replace default account commits). Powerful, read `--help` and `man git-filter-branch` carefully. Should only be used by Git Experts
   - `git_filter_repo_replace_text.sh` - rewrites Git history to replace a given text to scrub a credential or other sensitive token from history. Refuses to operate on tokens less than 8 chars for safety
@@ -1590,6 +1596,7 @@ Each of these three scripts creates an animated Git from running terminal comman
 - `youtube_download_queue_process.sh` - takes the next item from the download queue and calls `youtube_download_video.sh` on it
 - `video_to_720p_mp4` - converts one or more video files to 720p mp4 format using ffmpeg. Useful to make good trade-off of quality vs size for social media sharing
 - `video_to_480p_mp4` - symlink to above script converts to 480p mp4 format
+- `video_reencode_aac_audio.sh` - converts one or more video files to use the more compatible AAC audio format using ffmpeg. Necessary to upload to social media sites like X that don't accept audio formats like Opus (used in YouTube videos)
 - `vidopen.sh` - opens the given video file using whatever available tool is found on Linux or Mac
 
 See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Knowledge-Base/blob/main/multimedia.md).
@@ -1614,6 +1621,7 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
 - `spotify_release_year.sh` - searches for a given track or album and finds the original release year
 - `spotify_uri_json.sh` - takes a Spotify URI and dumps its JSON for inspection. You can pass one of the following formats: `spotify:<type>:<alphanumeric_ID>`, `http://open.spotify.com/<type>/<alphanumeric_ID>`, `<alphanumeric_ID>`
 - `spotify_uri_to_name.sh` - converts Spotify track / album / artist URIs to human readable `Artist - Track` or CSV format. Takes Spotify URIs, URL links or just IDs similar to `spotify_uri_json.sh` above. Reads URIs from files or standard input
+- `spotify_url_to_uri.sh` - converts Spotify track / album / artist open URLs to shorter Spotify URIs (useful to work with offline playlist comparisons)
 - `spotify_create_playlist.sh` - creates a Spotify playlist, either public or private
 - `spotify_rename_playlist.sh` - renames a Spotify playlist
 - `spotify_set_playlists_public.sh` / `spotify_set_playlists_private.sh` - sets one or more given Spotify playlists to public / private
